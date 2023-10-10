@@ -174,7 +174,7 @@ In the server response should be a pagination object in the following format:
 
 - **currentPage**: current returned page
 - **totalPages**: total pages amount
-- **totlaRecords**: total record amount
+- **totalRecords**: total record amount
 - **limit**: number of items per page
 
 Example:

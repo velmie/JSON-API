@@ -149,7 +149,7 @@ If the server does not support sorting as specified in the query parameter sort,
 
 ### Filtering
 
-To filter collection, frontend SHOULD set filtering value to the associated attribute name in the top query object.
+To filter collection, the frontend SHOULD set the filtering value to the associated attribute name in the top query object.
 
 ``
 GET /people?sort=age&username=tom&age=20
@@ -165,16 +165,16 @@ GET /people?sort=age&username=tom&age=20
 
 A server MAY choose to limit the number of resources returned in a response to a subset (“page”) of the whole set available.
 
-To make pagination request frontend SHOULD send query params in the next format:
+To make a pagination request frontend SHOULD send query params in the next format:
 
 - **page**: page number to get
 - **limit**: items per page
 
-In server response should be pagination object in the next format: 
+In the server response should be a pagination object in the following format: 
 
 - **currentPage**: current returned page
-- **totalPage**: total pages amount
-- **totlaRecord**: total record amount
+- **totalPages**: total pages amount
+- **totlaRecords**: total record amount
 - **limit**: number of items per page
 
 Example:
@@ -191,8 +191,8 @@ Example:
   ],
   "pagination": {
     "currentPage": 3,
-    "totalPage": 10,
-    "totalRecord": 92,
+    "totalPages": 10,
+    "totalRecords": 92,
     "limit": 10
   }
 }
@@ -241,15 +241,15 @@ Example:
 
 ### Errors
 
-Each error from server should be in next format:
+Each error from the server should be in the following format:
 
-- **code**: a unique code of an error. Used to identify error from the dictionary.
+- **code**: a unique code of an error. It is used to identify errors in the dictionary.
 - **target**: some sort of error scope
-	- **field** - the error related to certain field
-	- **common** - the error related to whole request
-- *message* (*OPTIONAL*): the error message for developers (use it only for debug purposes)
+	- **field** - the error related to a certain field
+	- **common** - the error related to the whole request
+- *message* (*OPTIONAL*): the error message for developers (use it only for debugging purposes)
 - *source* (*OPTIONAL*): a container for additional data. Arbitrary structure:
-	( **field**: resource object attribute name. Required if target set to field. )
+	( **field**: resource object attribute name. Required if the target set to the field. )
 
 Example:
 	 	 	
@@ -259,7 +259,7 @@ Example:
     {
       "code": "insufficient_funds",
       "target": "common",
-      "message": "Hi Nick, it seems that user has empty balance"
+      "message": "Hi Nick, it seems the user has an empty balance."
     },
     {
       "code": "invalid_punctuation",
@@ -267,16 +267,16 @@ Example:
       "source": {
         "field": "userPassword"
       },
-      "message": "Hi Vova, it seems that the password provided is missing a punctuation character"
+      "message": "Hi Vova, it seems that the password provided is missing a punctuation character."
     },
     {
       "code": "invalid_password_confirmation",
       "target": "field",
       "source": {
         "field": "userPassword",
-        "someAdditionalData": "bla bla bla"
+        "additionalData": "bla bla bla"
       },
-      "message": "Hi Lesha, it seems that the password and password confirmation fields do not match"
+      "message": "Hi Lesha, it seems that the password and password confirmation fields do not match."
     }
   ]
 }
@@ -287,9 +287,9 @@ Example:
 
 | Code | Description |
 | ----------- | ----------- |
-| 400 | If there is an error in request. E.g. wrong sort options, page number and etc |
-| 401 | Use it only if a user has wrong credentials (token, login/password) |
-| 403 | If a user has not had permission to the requested resource |
+| 400 | In case of an error in the request. E.g. wrong sort options, page number, etc |
+| 401 | Use it only if a user has the wrong credentials (token, login/password) |
+| 403 | If a user does not have enough permission to access the requested resource |
 | 422 | If there are validation errors |
 
 
